@@ -45,3 +45,17 @@ uv sync
 # Run the multi-agent workflow
 uv run python main.py
 ```
+```mermaid
+graph LR
+    User([👤 User]) -->|Topic| P(🔍 Planner)
+    P -->|AgentPlan JSON| W(🛠️ Worker)
+    W -->|work_result| C(⚖️ Critic)
+    
+    subgraph "Validation Gate"
+    C -->|Extract Topic| V{Topic > 20 chars?}
+    V -- No --> R[❌ Rejected]
+    V -- Yes --> A[✅ Approved]
+    end
+
+    R --> Out([Final JSON Review])
+    A --> Out
