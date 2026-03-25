@@ -25,8 +25,9 @@ I chose the **Sequential Handoff** pattern to ensure a clear "Chain of Responsib
 This project uses **[uv](https://astral.sh/uv/)** for fast, reproducible Python environments.
 
 ### 1. Clone the repository
+
 ```bash
-git clone [https://github.com/LAjoyan/AI-agent-patterns-python.git](https://github.com/LAjoyan/AI-agent-patterns-python.git)
+git clone https://github.com/LAjoyan/AI-agent-patterns-python.git
 cd AI-agent-patterns-python
 ```
 
