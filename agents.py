@@ -4,16 +4,31 @@ def planner_agent(topic: str) -> str:
     print(f"🔍 [Planner] Creating plan for: {topic}")
     plan = AgentPlan(
         task_name=topic,
+        # Now the steps include the actual topic name!
         steps=[
-            TaskStep(id=1, description="Research basics"),
-            TaskStep(id=2, description="Write summary")
+            TaskStep(id=1, description=f"Research basics of {topic}"),
+            TaskStep(id=2, description=f"Write a technical summary about {topic}")
         ]
     )
     return plan.model_dump_json()
 
-def critic_agent(data_json: str) -> str:
+def critic_agent(work_result: str) -> str:
     print("⚖️ [Critic] Validating work...")
-    review = CriticReview(approved=True, feedback="Looks solid!", score=0.9)
+
+    print("DEBUG work_result:", work_result)
+
+    # Extract topic
+    topic = work_result.split("Work results for ")[1].split(":")[0]
+    print("DEBUG topic:", topic)
+
+    # ✅ NEW LOGIC (this is the important part)
+    is_good_effort = len(topic) > 20
+
+    review = CriticReview(
+        approved=is_good_effort,
+        feedback="Great detail!" if is_good_effort else "Too brief, provide more detail.",
+        score=0.95 if is_good_effort else 0.2
+    )
     return review.model_dump_json()
 
 def worker_agent(plan_json: str) -> str:
