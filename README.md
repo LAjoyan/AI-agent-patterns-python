@@ -45,6 +45,9 @@ uv sync
 # Run the multi-agent workflow
 uv run python main.py
 ```
+
+### 📊 Agent Workflow Visualization
+
 ```mermaid
 graph LR
     User([👤 User]) -->|Topic| P(🔍 Planner)
