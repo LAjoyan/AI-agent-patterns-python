@@ -1,5 +1,8 @@
 # 🤖 Multi-Agent Workflow: Sequential Task Execution
 
+**A Python implementation of a Multi-Agent Workflow using the Sequential Handoff (Planner-Worker-Critic) pattern. Features structured JSON handoffs, specialized agent roles, and a simulated "Smart" Validation Guardrail.**
+---
+
 This project implements a **Sequential Handoff** pattern using three specialized AI agents. It demonstrates how to decompose complex tasks into structured sub-steps and apply autonomous quality control.
 
 ## 🚀 Key Feature: The "Smart Critic"
