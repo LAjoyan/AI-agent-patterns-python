@@ -48,17 +48,22 @@ uv run python main.py
 
 ### 📊 Agent Workflow Visualization
 
-```mermaid
-graph LR
-    User([👤 User]) -->|Topic| P(🔍 Planner)
-    P -->|AgentPlan JSON| W(🛠️ Worker)
-    W -->|work_result| C(⚖️ Critic)
-    
-    subgraph "Validation Gate"
-    C -->|Extract Topic| V{Topic > 20 chars?}
-    V -- No --> R[❌ Rejected]
-    V -- Yes --> A[✅ Approved]
-    end
 
-    R --> Out([Final JSON Review])
-    A --> Out
+
+```mermaid
+graph TD
+    User([👤 User]) -->|Topic| P(🔍 Planner)
+    P -->|Plan| W(🛠️ Worker)
+    W -->|Result| C(⚖️ Critic)
+    
+    C -->|Feedback| Decision{Approved?}
+    
+    Decision -- No --> P
+    Decision -- Yes --> End([✅ Success])
+
+    subgraph "Iteration Loop (Max 3)"
+    P
+    W
+    C
+    Decision
+    end
